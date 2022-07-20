@@ -26,15 +26,15 @@ char buffer[60];
 void eat()
 {
 	printf("You eat it!");
-};
+}
 void drink()
 {
 	printf("You drink it!");
-};
+}
 void buy()
 {
 	printf("You buy it!");
-};
+}
 
 void (*actionfunctions[numactions])() = {&eat, &drink, &buy};
 
@@ -113,7 +113,7 @@ void doaction(int actionnum, struct room *allrooms, int *curnum)
 		printf("You attempt to %s the %s.", buffer, allrooms[*curnum].items[actionnum].name);
 		printf("\nHowever, this sim is so bad that you cant do that yet.\nWell, this is embarrasing...\nLets forget about that.\nTry something else!");
 	}
-};
+}
 
 int stringtonum(char *input, struct room *allrooms, int *curnum)
 {
@@ -125,19 +125,19 @@ int stringtonum(char *input, struct room *allrooms, int *curnum)
 	if (!memcmp(input, "west\n", 5) ||!memcmp(input, "w", 2)){return 5;}
 	if (!memcmp(input, "get ", 4)){return 6;}
 	if (!memcmp(input, "use ", 4))
-{
-	for (int i = 0; allrooms[*curnum].items[i].ats[0] != 0; ++i)
 	{
-		if (!memcmp(((char *)input + 4), allrooms[*curnum].items[i].name, strlen(allrooms[*curnum].items[i].name)))
+		for (int i = 0; allrooms[*curnum].items[i].ats[0] != 0; ++i)
 		{
-			return i + 7;
+			if (!memcmp(((char *)input + 4), allrooms[*curnum].items[i].name, strlen(allrooms[*curnum].items[i].name)))
+			{
+				return i + 7;
+			}
 		}
+		printf("There isn't one I can see.\n");
+		return 1;
 	}
-	printf("There isn't one I can see.\n");
-	return 1;
-}
 	return 0;
-};
+}
 
 int main(void)
 {
@@ -151,10 +151,10 @@ int main(void)
 
 	for(int i = 0; i < 2; ++i)
 	{
-	for (int j = 0; j < 8; ++j)
-	{
-		start[i].items[j].ats[0] = 0;
-	}
+		for (int j = 0; j < 8; ++j)
+		{
+			start[i].items[j].ats[0] = 0;
+		}
 	}
 	start[0].items[1] = start[0].items[0];
 	start[0].items[0] = cup;
@@ -162,11 +162,11 @@ int main(void)
 	int action = 1;
 	int curroom = 0;
 	do {
-	doaction(action, start, &curroom);
-	dosim(start, &curroom);
-	printf("\n>");
-	fgets(buffer, 60, stdin);
-	action = stringtonum(buffer, start, &curroom);
+		doaction(action, start, &curroom);
+		dosim(start, &curroom);
+		printf("\n>");
+		fgets(buffer, 60, stdin);
+		action = stringtonum(buffer, start, &curroom);
 	} while(action != -1);
 
 	return 0;

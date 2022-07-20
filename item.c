@@ -28,6 +28,6 @@ void printitem(struct item thing)
 	}
 	puts("----");
 }
-	struct item coffee = {.name = "coffee", .ats[0] = ingestable, .ats[1] = warm};
-	struct item cup = {.name = "cup", .ats[0] = holdsliquid, .ats[2] = holdsstuff, .contents[0] = &coffee};
+struct item coffee = {.name = "coffee", .ats[0] = ingestable, .ats[1] = warm};
+struct item cup = {.name = "cup", .ats[0] = holdsliquid, .ats[2] = holdsstuff, .contents[0] = &coffee};
 
